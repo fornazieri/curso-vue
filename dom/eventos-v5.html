@@ -1,0 +1,57 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- https://vuejs.org/v2/guide/events.html#Key-Modifiers -->
+<div id="app">
+    <p>{{ contador }}</p>
+    <!--o $event é uma palavra especial que envia o evento, o mesmo que é enviado por padrão caso nada seja passado
+        nao pode ser trocado por outra palavra, na chamada tem que ser $event sempre, agora
+        na função em si, pode ser qualquer nome, no caso chamei de eventPadrao -->
+    <button v-on:click="somar(5, $event)">Somar 1</button>
+    
+    <p v-on:mousemove="atualizarXY">
+        Mouse: {{ x }} e {{ y }}
+        <!-- <span v-on:mousemove="parar">PARAR AQUI!!!</span> -->
+        <!-- <span v-on:mousemove.stop="">PARAR AQUI!!!</span> -->
+        <span v-on:mousemove.stop.prevent="">PARAR AQUI!!!</span>
+    </p>
+
+    <!-- o prevent previne o comportamento padrão -->
+    <!-- <a v-on:click.prevent="" href="http://google.com.br">Google</a> -->
+    <a v-on:click="naoNavegar" href="http://google.com.br">Google</a>
+
+    <hr>
+
+    <input type="text" v-on:keyup.enter.alt="exibirAlerta">
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            contador: 0,
+            x: 0,
+            y: 0
+        },
+        methods: {
+            somar(passo, eventPadrao) {
+                console.log(passo, eventPadrao);
+                this.contador += passo;
+            },
+            atualizarXY(eventoPadrao) {
+                // console.log(eventoPadrao);
+                this.x = eventoPadrao.clientX;
+                this.y = eventoPadrao.clientY;
+            }
+            // ,
+            // parar(e) {
+            //     e.stopPropagation();
+            // }
+            ,
+            naoNavegar(e){
+                e.preventDefault();
+            }, 
+            exibirAlerta() {
+                alert('Estou te alertando!');
+            }
+        }
+    })
+</script>
