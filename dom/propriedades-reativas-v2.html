@@ -1,0 +1,52 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <h3>Um metodo computador, da sessão computed, sabe automaticamente que deve ser chamado, quando algum atributo
+        contido dentro dele for modificado, por exemplo, os botões auemntar e diminuir alteram o valor de contador, e o 
+        mesmo é utilizando no metodo resultado, o botão aumentar 2 não altera nada, e um metodo qualquer tambem não
+        porem se dentro de umMetodoQualquer você colocar o contador, automaticamente a função computada é chamada
+        pois ela sabe que algum dado que é usado dentro dela foi alterado
+    </h3>
+    <button v-on:click="aumentar">Aumentar</button>
+    <button v-on:click="contador2++">Aumentar 2</button>
+    <button v-on:click="diminuir">Diminuir</button>
+    <button v-on:click="umMetodoQualquer">Um Metodo Qualquer</button>
+    <p>Contador: {{ contador }} Contador 2: {{ contador2 }}</p>
+    <p>Resultado: {{ resultado }}</p>
+    <p>Valor Qualquer: {{ umValorQualquer }}</p>
+</div>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            contador: 0,
+            contador2: 0
+            ,umValorQualquer: ''
+        },
+        computed:{
+            resultado() {
+                console.log('metodo computed resultado chamado...');
+                return this.contador >= 5 ? 'Maior ou igual a 5' : 'Menor que 5';
+            }
+        },
+        methods:{
+            aumentar() {
+                this.contador++;
+            },
+            diminuir() {
+                this.contador--;
+            }
+            ,umMetodoQualquer() {
+                this.umValorQualquer = 'Qualquer coisa';
+                //this.contador = 2;
+            }
+            //,
+            // resultado() {
+            //     console.log('método resultado chamado...');
+            //     return this.contador >= 5 ? 'Maior ou igual a 5' : 'Menor que 5';
+            // }
+        }
+    })
+</script>

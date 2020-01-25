@@ -1,0 +1,27 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+    <h3>Two Way Databind</h3>
+    <p v-once>Titulo com v-once: {{ titulo }}</p>
+    <p>Titulo sem v-once: {{ titulo }}</p>
+
+    <p>Usando v-bind:value e v-on:input alterando o dado titulo com titulo = $event.target.value</p>
+    <small>v-bind faz o bind de uma unida direção, ou seja do javascript para o html</small>
+    <small>v-on pego um evento que aconteceu no template e posso fazer alguma ação para atualizar os dados na minha instancia</small>
+    <hr>
+    <input type="text" v-bind:value="titulo" v-on:input="titulo = $event.target.value">
+
+    <p>Usando v-model="titulo"</p>
+    <small>v-model faz as duas coisas, atualiza nos dois sentidos, tanto o html atualiza os dados no javascript e tanto aquilo que for atualizado no vue faz efeito no html</small>
+    <hr>
+    <input type="text" v-model="titulo">
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Usando VueJS!'
+        }
+    })
+</script>
